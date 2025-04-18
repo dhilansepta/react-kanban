@@ -2,10 +2,10 @@ import { JSX } from 'react'
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import SideMenuLayout from './layouts/SideMenuLayout'
-import TaskList from './pages/TaskList'
-import TaskProgress from './pages/TaskProgress'
+import TaskProgress from './features/tasks/components/TaskProgress/TaskProgress'
 import { RecoilRoot } from 'recoil'
 import TaskSummary from './features/tasks/components/TaskSummary'
+import TaskList from './features/tasks/components/TaskList/TaskList'
 
 const router = createBrowserRouter([
   {
