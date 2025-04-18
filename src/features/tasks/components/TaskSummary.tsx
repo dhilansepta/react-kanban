@@ -3,8 +3,8 @@ import type { Task, CSSProperties } from '../../../types/index';
 import { uncompletedTasksSelector, completedTasksSelector } from '../TaskSelectors';
 
 const TaskSummary = () => {
-    const completedTasks = useRecoilValue<Task[]>(completedTasksSelector);
-    const uncompletedTasks = useRecoilValue<Task[]>(uncompletedTasksSelector);
+    const completedTasks: Task[] = useRecoilValue(completedTasksSelector);
+    const uncompletedTasks: Task[] = useRecoilValue(uncompletedTasksSelector);
 
     return (
         <div style={styles.container}>
