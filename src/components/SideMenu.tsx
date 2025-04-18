@@ -40,7 +40,7 @@ const styles: CSSProperties = {
     container: {
         display: 'flex',
         flexDirection: 'column',
-        width: '200px',
+        width: '20vw',
         height: '100vh',
         backgroundColor: '#f2d1ae',
     },
