@@ -41,7 +41,6 @@ const styles: CSSProperties = {
         display: 'flex',
         flexDirection: 'column',
         width: '20vw',
-        height: '100vh',
         backgroundColor: '#f2d1ae',
     },
     link: {

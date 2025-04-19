@@ -1,5 +1,7 @@
 import { Task, CSSProperties } from "../../../../constants/index";
 import { TASK_PROGRESS_ID } from "../../../../constants/app";
+import { useRecoilState } from "recoil";
+import { tasksState } from "../../TaskAtoms";
 
 interface TaskCardProps {
     task: Task,
@@ -13,11 +15,31 @@ const getArrowStyles = (progressOrder: number): React.CSSProperties => {
         justifyContent: justifyContentValue,
     }
 }
+
+const circleType = (progressOrder: number): 'check_circle' | 'radio_button_unchecked' => {
+    return (
+        progressOrder === TASK_PROGRESS_ID.COMPLETED ? 'check_circle' : 'radio_button_unchecked'
+    )
+}
+
 const TaskCard = ({ task }: TaskCardProps) => {
+    const [tasks, setTasks] = useRecoilState<Task[]>(tasksState);
+
+    const changeProgress = (taskId: number): void => {
+        const updatedTask: Task[] = tasks.map((task: Task) =>
+            task.id === taskId
+                ? { ...task, progressOrder: TASK_PROGRESS_ID.COMPLETED }
+                : task
+        )
+        setTasks(updatedTask);
+    }
+
     return (
         <div style={styles.taskCard}>
             <div style={styles.icons}>
-                <span className="material-icons">{task.progressOrder === TASK_PROGRESS_ID.COMPLETED ? 'check_circle' : 'radio_button_unchecked'}</span>
+                <span className="material-icons" onClick={(): void => changeProgress(task.id)} style={{cursor:'pointer'}}>
+                    {circleType(task.progressOrder)}
+                </span>
                 <span className="material-icons">more_vert</span>
             </div>
             <div style={styles.cardTitle}>
