@@ -1,5 +1,5 @@
 import React from "react";
-import type { Task, CSSProperties } from "../../../../types/index";
+import type { Task, CSSProperties } from "../../../../constants/index";
 import { tasksState } from "../../TaskAtoms";
 import { useRecoilValue } from "recoil";
 import TaskListItem from "./TaskListItem";

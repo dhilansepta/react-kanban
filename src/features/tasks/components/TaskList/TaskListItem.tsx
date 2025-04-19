@@ -1,21 +1,21 @@
-import { Task, CSSProperties } from "../../../../types/index";
-
+import { Task, CSSProperties } from "../../../../constants/index";
+import { TASK_PROGRESS_ID, TASK_PROGRESS_STATUS } from "../../../../constants/app";
 interface TaskListItemProps {
     task: Task
 }
 
 const getProgressCategory = (progressOrder: number) => {
     switch (progressOrder) {
-        case 1:
-            return 'Not Started'
-        case 2:
-            return 'In Progress'
-        case 3:
-            return 'In Review'
-        case 4:
-            return 'Completed'
+        case TASK_PROGRESS_ID.NOT_STARTED:
+            return TASK_PROGRESS_STATUS.NOT_STARTED
+        case TASK_PROGRESS_ID.IN_PROGRESS:
+            return TASK_PROGRESS_STATUS.IN_PROGRESS
+        case TASK_PROGRESS_ID.WAITING:
+            return TASK_PROGRESS_STATUS.WAITING
+        case TASK_PROGRESS_ID.COMPLETED:
+            return TASK_PROGRESS_STATUS.COMPLETED
         default:
-            return 'Not Started'
+            return TASK_PROGRESS_STATUS.NOT_STARTED
     }
 }
 
@@ -24,7 +24,7 @@ const TaskListItem = ({ task }: TaskListItemProps) => {
         <div style={styles.tableBody}>
             <div style={styles.tableBodyTaskName}>
                 <span className="material-icons">
-                    {task.progressOrder === 4 ? 'check_circle' : 'radio_button_unchecked'}
+                    {task.progressOrder === TASK_PROGRESS_ID.COMPLETED ? 'check_circle' : 'radio_button_unchecked'}
                 </span>
                 {task.title}
             </div>

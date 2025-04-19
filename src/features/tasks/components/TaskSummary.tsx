@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import type { Task, CSSProperties } from '../../../types/index';
+import type { Task, CSSProperties } from '../../../constants/index';
 import { uncompletedTasksSelector, completedTasksSelector } from '../TaskSelectors';
 
 const TaskSummary = () => {
