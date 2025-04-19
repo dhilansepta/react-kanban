@@ -1,4 +1,4 @@
-import { Task, CSSProperties } from "../../../../types/index";
+import { Task, CSSProperties } from "../../../../constants/index";
 import TaskCard from "./TaskCard";
 
 interface TaskColumnProps {

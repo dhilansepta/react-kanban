@@ -1,5 +1,5 @@
 import React from 'react'
-import { CSSProperties } from '../types/index'
+import { CSSProperties } from '../constants/index'
 import { NavLink } from 'react-router-dom'
 
 const SideMenu = () => {

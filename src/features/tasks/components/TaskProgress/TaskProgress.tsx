@@ -1,4 +1,4 @@
-import type { CSSProperties, Task } from "../../../../types/index";
+import type { CSSProperties, Task } from "../../../../constants/index";
 import TaskColumn from "./TaskColumn";
 import {
     notStartedTasksSelector,
@@ -7,6 +7,7 @@ import {
     completedTasksSelector,
 } from "../../TaskSelectors";
 import { useRecoilValue } from "recoil";
+import { TASK_PROGRESS_STATUS } from "../../../../constants/app";
 
 const TaskProgress = () => {
     const notStartedTasks: Task[] = useRecoilValue(notStartedTasksSelector);
@@ -19,19 +20,19 @@ const TaskProgress = () => {
             <h1 style={styles.heading}>Task Progress</h1>
             <div style={styles.taskCategories}>
                 <TaskColumn
-                    columnTitle="Not Started"
+                    columnTitle={TASK_PROGRESS_STATUS.NOT_STARTED}
                     tasks={notStartedTasks}
                 />
                 <TaskColumn
-                    columnTitle="In Progress"
+                    columnTitle={TASK_PROGRESS_STATUS.IN_PROGRESS}
                     tasks={inProgressTasks}
                 />
                 <TaskColumn
-                    columnTitle="Waiting/In Review"
+                    columnTitle={TASK_PROGRESS_STATUS.WAITING}
                     tasks={waitingTasks}
                 />
                 <TaskColumn
-                    columnTitle="Completed"
+                    columnTitle={TASK_PROGRESS_STATUS.COMPLETED}
                     tasks={completedTask}
                 />
             </div>

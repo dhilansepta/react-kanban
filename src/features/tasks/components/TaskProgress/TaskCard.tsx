@@ -1,4 +1,5 @@
-import { Task, CSSProperties } from "../../../../types/index";
+import { Task, CSSProperties } from "../../../../constants/index";
+import { TASK_PROGRESS_ID } from "../../../../constants/app";
 
 interface TaskCardProps {
     task: Task,
@@ -6,7 +7,7 @@ interface TaskCardProps {
 
 const getArrowStyles = (progressOrder: number): React.CSSProperties => {
     const justifyContentValue: 'flex-end' | 'space-between' =
-        progressOrder === 1 ? 'flex-end' : 'space-between'
+        progressOrder === TASK_PROGRESS_ID.NOT_STARTED ? 'flex-end' : 'space-between'
     return {
         ...commonLinkStyles,
         justifyContent: justifyContentValue,
@@ -16,7 +17,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
     return (
         <div style={styles.taskCard}>
             <div style={styles.icons}>
-                <span className="material-icons">{task.progressOrder === 4 ? 'check_circle' : 'radio_button_unchecked'}</span>
+                <span className="material-icons">{task.progressOrder === TASK_PROGRESS_ID.COMPLETED ? 'check_circle' : 'radio_button_unchecked'}</span>
                 <span className="material-icons">more_vert</span>
             </div>
             <div style={styles.cardTitle}>
@@ -29,10 +30,10 @@ const TaskCard = ({ task }: TaskCardProps) => {
                 Due On {task.dueDate}
             </div>
             <div style={getArrowStyles(task.progressOrder)}>
-                {task.progressOrder !== 1 && (
+                {task.progressOrder !== TASK_PROGRESS_ID.NOT_STARTED && (
                     <button className="material-icons">chevron_left</button>
                 )}
-                {task.progressOrder !== 4 && (
+                {task.progressOrder !== TASK_PROGRESS_ID.COMPLETED && (
                     <button className="material-icons">chevron_right</button>
                 )}
             </div>
