@@ -22,8 +22,10 @@ const circleType = (progressOrder: number): 'check_circle' | 'radio_button_unche
 }
 
 const TaskCard = ({ task }: TaskCardProps) => {
-    
-    const {changeProgress} = useTasksAction();
+
+    const { changeProgress } = useTasksAction();
+    const { moveRight } = useTasksAction();
+    const { moveLeft } = useTasksAction();
 
     return (
         <div style={styles.taskCard}>
@@ -44,10 +46,10 @@ const TaskCard = ({ task }: TaskCardProps) => {
             </div>
             <div style={getArrowStyles(task.progressOrder)}>
                 {task.progressOrder !== TASK_PROGRESS_ID.NOT_STARTED && (
-                    <button className="material-icons">chevron_left</button>
+                    <button className="material-icons" onClick={(): void => moveLeft(task.id)} style={{ cursor: 'pointer' }}>chevron_left</button>
                 )}
                 {task.progressOrder !== TASK_PROGRESS_ID.COMPLETED && (
-                    <button className="material-icons">chevron_right</button>
+                    <button className="material-icons" onClick={(): void => moveRight(task.id)} style={{ cursor: 'pointer' }}>chevron_right</button>
                 )}
             </div>
         </div>
