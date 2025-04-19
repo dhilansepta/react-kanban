@@ -1,30 +1,53 @@
+import { useRecoilState } from "recoil";
+import { TASK_PROGRESS_ID } from "../../../../constants/app";
 import { Task, CSSProperties } from "../../../../constants/index";
-import { TASK_PROGRESS_ID, TASK_PROGRESS_STATUS } from "../../../../constants/app";
+import { tasksState } from "../../TaskAtoms";
+
 interface TaskListItemProps {
     task: Task
 }
 
 const getProgressCategory = (progressOrder: number) => {
     switch (progressOrder) {
-        case TASK_PROGRESS_ID.NOT_STARTED:
-            return TASK_PROGRESS_STATUS.NOT_STARTED
-        case TASK_PROGRESS_ID.IN_PROGRESS:
-            return TASK_PROGRESS_STATUS.IN_PROGRESS
-        case TASK_PROGRESS_ID.WAITING:
-            return TASK_PROGRESS_STATUS.WAITING
-        case TASK_PROGRESS_ID.COMPLETED:
-            return TASK_PROGRESS_STATUS.COMPLETED
+        case 1:
+            return 'Not Started'
+        case 2:
+            return 'In Progress'
+        case 3:
+            return 'In Review'
+        case 4:
+            return 'Completed'
         default:
-            return TASK_PROGRESS_STATUS.NOT_STARTED
+            return 'Not Started'
     }
 }
 
+const circleType = (progressOrder: number): 'check_circle' | 'radio_button_unchecked' => {
+    return (
+        progressOrder === TASK_PROGRESS_ID.COMPLETED ? 'check_circle' : 'radio_button_unchecked'
+    )
+}
+
+
+
 const TaskListItem = ({ task }: TaskListItemProps) => {
+    const [tasks, setTasks] = useRecoilState<Task[]>(tasksState);
+
+    const changeProgress = (taskId: number): void => {
+        const updatedTasks: Task[] =
+            tasks.map((task) =>
+                task.id === taskId
+                    ? { ...task, progressOrder: TASK_PROGRESS_ID.COMPLETED }
+                    : task
+            )
+        setTasks(updatedTasks);
+    }
+
     return (
         <div style={styles.tableBody}>
             <div style={styles.tableBodyTaskName}>
-                <span className="material-icons">
-                    {task.progressOrder === TASK_PROGRESS_ID.COMPLETED ? 'check_circle' : 'radio_button_unchecked'}
+                <span className="material-icons" onClick={(): void => { changeProgress(task.id) }} style={{cursor:'pointer'}}>
+                    {circleType(task.progressOrder)}
                 </span>
                 {task.title}
             </div>

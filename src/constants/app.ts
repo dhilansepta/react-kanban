@@ -3,7 +3,6 @@ export const TASK_PROGRESS_ID = {
     IN_PROGRESS: 2,
     WAITING: 3,
     COMPLETED: 4,
-    UNCOMPLETED: 5,
 }
 
 export const TASK_PROGRESS_STATUS = {
@@ -11,5 +10,4 @@ export const TASK_PROGRESS_STATUS = {
     IN_PROGRESS: "In Progress",
     WAITING: "Waiting / In Review",
     COMPLETED: "Completed",
-    UNCOMPLETED: "Uncompleted",
 }
