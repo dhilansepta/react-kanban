@@ -1,7 +1,6 @@
-import { useRecoilState } from "recoil";
 import { TASK_PROGRESS_ID } from "../../../../constants/app";
 import { Task, CSSProperties } from "../../../../constants/index";
-import { tasksState } from "../../TaskAtoms";
+import { useTasksAction } from "../../hooks/Tasks";
 
 interface TaskListItemProps {
     task: Task
@@ -28,20 +27,9 @@ const circleType = (progressOrder: number): 'check_circle' | 'radio_button_unche
     )
 }
 
-
-
 const TaskListItem = ({ task }: TaskListItemProps) => {
-    const [tasks, setTasks] = useRecoilState<Task[]>(tasksState);
-
-    const changeProgress = (taskId: number): void => {
-        const updatedTasks: Task[] =
-            tasks.map((task) =>
-                task.id === taskId
-                    ? { ...task, progressOrder: TASK_PROGRESS_ID.COMPLETED }
-                    : task
-            )
-        setTasks(updatedTasks);
-    }
+    
+    const {changeProgress} = useTasksAction();
 
     return (
         <div style={styles.tableBody}>
